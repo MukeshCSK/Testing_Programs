@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reveal Website Elements On Scroll</title>
+  </head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html,body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body{
+  background: #1D212B;
+}
+
+nav{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.6s;
+            padding: 40px 100px;
+            z-index: 100000;
+        }
+        nav.sticky{
+            padding: 15px 100px;
+            background: #404040;
+        }
+        nav .nav_bar_logo{
+            position: relative;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            font-size: 2em;
+            text-decoration: none;
+            font-size: 2em;
+            letter-spacing: 2px;
+            transition: 0.6s;
+        }
+        nav ul{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        nav ul li{
+            position: relative;
+            list-style: none;
+        }
+        nav ul li a{
+            position: relative;
+            margin: 0 15px;
+            text-decoration: none;
+            color: #fff;
+            letter-spacing: 2px;
+            font-weight: 500px;
+            transition: 0.6s;
+        }
+        nav ul li a:hover{
+            color: red;
+        }
+
+        nav.sticky .nav_bar_logo,
+        nav.sticky ul li a{
+            color: #fff;
+        }
+        nav.sticky ul li a:hover{
+            color: red;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15%;
+            height: 75px;
+            line-height: 75px;
+        }
+
+
+
+        @media (max-width: 935px) {
+            nav{
+                background: #404040;
+            }
+            nav ul {
+                display: grid;
+                position: absolute;
+                background: #404040;
+                width: 100%;
+                top: 75px;
+                left: 0;
+                transform: translateY(-100%);
+                z-index: -1;
+                transition: .6s;
+            }
+            nav ul li {
+                padding-left: 35px;
+            }
+            nav ul li a{
+                position: relative;
+                margin: 0 15px;
+                text-decoration: none;
+                color: #fff;
+                letter-spacing: 2px;
+                font-weight: 500px;
+                transition: 0.6s;
+            }
+            nav ul li a:hover{
+                color: red;
+            }
+            nav .navbar-toggler {
+                display: grid !important;
+            }
+        }
+
+        nav .navbar-toggler {
+            display: none;
+            height: min-content;
+            margin: 0px -10px 0 0;
+            cursor: pointer;
+        }
+
+        nav .navbar-toggler .nav_bar_bar {
+            width: 40px;
+            height: 5px;
+            margin-bottom: 10px;
+            background: #ffffff;
+            border-radius: 10%;
+            transition: .4s;
+        }
+
+        input {
+            display: none;
+        }
+
+        input:checked ~ nav ul {
+            transform: translateY(0);
+        }
+
+        input:checked ~ nav .navbar-toggler {
+            margin-top: 35px;
+        }
+
+        input:checked ~ nav .navbar-toggler .nav_bar_bar:nth-child(1) {
+            position: absolute;
+            transform: rotate(45deg);
+        }
+
+        input:checked ~ nav .navbar-toggler .nav_bar_bar:nth-child(2) {
+            display: none;
+        }
+
+        input:checked ~ nav .navbar-toggler .nav_bar_bar:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
+section{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+section:nth-child(1){
+  color: #fff;
+}
+
+section:nth-child(2){
+  color: #1D212B;
+  background: #fff;
+}
+
+section:nth-child(3){
+  color: #fff;
+}
+
+section:nth-child(4){
+  color: #1D212B;
+  background: #f0f4fb;
+}
+
+section:nth-child(5){
+  color: #fff;
+}
+
+section:nth-child(6){
+  color: #1D212B;
+  background: #f0f4fb;
+}
+
+section:nth-child(7){
+  color: #fff;
+  background: #191919;
+}
+
+section:nth-child(8){
+  color: #f0f4fb;
+  background: #0d0d0d;
+}
+
+section .container{
+  margin: 100px;
+}
+
+section h1{
+  font-size: 60px;
+}
+
+section h2{
+  font-size: 40px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+section .cards{
+  display: flex;
+}
+
+section .cards .text-card{
+  background: #2696E9;
+  margin: 20px;
+  padding: 20px;
+}
+
+section .cards .text-card h3{
+  font-size: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.site-container{
+    margin: 2rem auto;
+    max-width: calc(100% - 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+        .article-container{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(265px,1fr));
+            gap: 4rem;
+        }
+        .article-image{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .article-image img{
+            max-width: 100%;
+            height: 100%;
+            border-radius: 20px 20px 0 0;
+        }
+        .article-card{
+            background: white;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .article-card:hover{
+            box-shadow: 0 4px 20px 0 rgba(34,68,123,0.2);
+            cursor: pointer;
+        }
+        .article-content{
+            padding: 2rem;
+        }
+        .article-content .card-category{
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            color: #6b82a7;
+            display: block;
+            text-decoration: none;
+        }
+        .article-content .article-content_para{
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            color: #6b82a7;
+            display: block;
+            text-decoration: none;
+        }
+        .article-content .card-title{
+            margin: 1rem 0;
+            color: #22447b;
+        }
+        .article-content .card-excerpt{
+            font-size: 1rem;
+            line-height: 1.5rem;
+            color: #6b82a7;
+            margin: 0;
+        }
+        @media screen and (min-width: 786px) {
+            .site-container{
+                max-width: 608px;
+            }
+            .article-card{
+                display: grid;
+                grid-template-rows: 220px 1fr;
+            }
+        }
+        @media screen and (min-width: 1280px) {
+            .site-container{
+                max-width: 1500px;
+            }
+        }
+
+        #about_section{
+            width: 100%;
+            padding: 78px 0px;
+            background-color: #191919;
+        }
+        .about img{
+            height: auto;
+            width: 420px;    
+        }
+        .about-text{
+            width: 550px;
+        }
+        .main_about{
+            width: 1130px;
+            max-width: 95%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .about-text h1{
+            color: white;
+            font-size: 80px;
+            text-transform: capitalize;
+            margin-bottom: 20px;
+            margin-right: 181px;
+        }
+        .about-text h5{
+            color: white;
+            font-size: 25px;
+            text-transform: capitalize;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+        span{
+            color: #f9004d;            
+        }
+        .about-text p{
+            color: #fcfc;
+            letter-spacing: 1px;
+            line-height: 28px;
+            font-size: 18px;
+            margin-bottom: 45px;
+        }
+        button{
+            background: #f9004d;
+            color: white;
+            text-decoration: none;
+            border: 2px solid transparent;
+            font-weight: bold;
+            padding: 13px 30px;
+            border-radius: 30px;
+            transition: .4s;
+        }
+        button:hover{
+            background: transparent;
+            border: 2px solid #f9004d;
+            cursor: pointer;
+        }
+        @media (max-width: 1200px) {
+            .main_about {
+                flex-direction: column;
+                align-items: center;
+            }
+            .about-text {
+                width: 100%;
+                text-align: center;
+                margin-top: 30px;
+            }
+            .about-text h1 {
+                font-size: 60px;
+                margin-right: 0px;
+            }
+            .about-text h5 {
+                font-size: 20px;
+            }
+            .about img {
+                width: 100%;
+                max-width: 400px;
+            }
+            .about-text p {
+                font-size: 16px;
+                margin-right: 250px;
+                margin-left: 250px;
+            }
+        }
+
+        .wrapper_faq {
+          max-width: 600px;
+          width: 100%;
+          margin: 10vh auto;
+      }
+
+      h1 {
+          font-size: 2em;
+          margin-bottom: 20px;
+          text-align:center;
+      }
+
+      input {
+          display: none;
+      }
+
+      label {
+          display: flex;
+          height: 50px;
+          cursor: pointer;
+          border: 3px solid #3E474F;
+          user-select: none;
+      }
+
+      label div:first-child {
+          width: 100%;
+          line-height: 45px;
+          margin-left: 10px;
+          font-size: 1.2em;
+      }
+
+      .cross{
+          margin-right:15px;
+          margin-top:3px;
+      }
+
+      .cross:before,.cross:after {
+          content: '';
+          border-top: 2px solid #3E474F;
+          width: 15px;
+          display: block;
+          margin-top: 18px;
+          transition: 0.3s;
+      }
+
+      .cross:after {
+          transform: rotate(90deg);
+          margin-top: -2px;
+      }
+
+      .content {
+          box-sizing: border-box;
+          font-size: 0.9em;
+          margin: 10px 10px;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height, .5s;
+      }
+
+      input:checked ~ .content {
+          max-height: 400px;
+          transition: max-height, 1s;
+      }
+
+      input:checked ~ label .cross:before {
+          transform: rotate(180deg);
+      }
+
+      input:checked ~ label .cross:after {
+          transform: rotate(0deg);
+      }
+
+      .questions{
+          margin-top:20px;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height, .5s;
+      }
+
+      .questions label{
+          border:none;
+          box-shadow: none;
+          margin:0;
+      }
+
+      input:checked ~ .questions {
+          max-height: 400px;
+          border-bottom:2px solid #3E474F;
+          transition: 1s;
+      }
+
+      /*----------tool-tip------------*/
+
+      .tip {
+          color: #f03768;
+          cursor: help;
+          position: relative;
+          overflow: visible;
+          font-family: monospace;
+          font-size: 1.3em;
+      }
+
+      .tip:before,
+      .tip:after {
+          position: absolute;
+          opacity: 0;
+          z-index: -100;    
+          transform: translateY(-30%);
+          transition: .4s;
+      }
+
+      .tip:before {
+          content: '';
+          border-style: solid;
+          border-width: 0.8em 0.5em 0 0.5em;
+          border-color: #3E474F transparent transparent transparent;
+          transform: translateY(-200%);
+          bottom:90%;
+          left:50%;
+      }
+
+      .tip:after {
+          content: attr(data-tip);
+          background: #3E474F;
+          color: white;
+          width: 150px;
+          padding: 10px;
+          font-size: 0.8em;
+          bottom: 150%;
+          left: -50%;
+      }
+
+      .tip:hover:before,
+      .tip:hover:after {
+          opacity: 1;
+          z-index: 100;
+          transform: scaleY(1);
+      }
+      #contact_section {
+        display: flex;
+        flex-direction: column;
+        }
+
+        .wrapper_faq {
+        margin-bottom: 100px;
+        }
+
+        .wrapper_social_media {
+        display: flex;
+        flex-wrap: wrap;
+        }
+
+
+      .wrapper_social_media .button_social_media{
+        display: inline-block;
+        height: 60px;
+        width: 60px;
+        float: left;
+        margin: 0 5px;
+        overflow: hidden;
+        background: #fff;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease-out;
+        }
+        .wrapper_social_media .button_social_media:hover{
+        width: 200px;
+        }
+        .wrapper_social_media .button_social_media .icon_social_media{
+        display: inline-block;
+        height: 60px;
+        width: 60px;
+        text-align: center;
+        border-radius: 50px;
+        box-sizing: border-box;
+        line-height: 60px;
+        transition: all 0.3s ease-out;
+        color: black;
+
+        }
+        .wrapper_social_media .button_social_media:nth-child(1):hover .icon_social_media{
+        background: #4267B2;
+        }
+        .wrapper_social_media .button_social_media:nth-child(2):hover .icon_social_media{
+        background: #1DA1F2;
+        }
+        .wrapper_social_media .button_social_media:nth-child(3):hover .icon_social_media{
+        background: linear-gradient(45deg, rgba(245,133,41) 20%, rgba(254,218,119) 40%, rgba(221,42,123) 60%, rgba(129,52,175) 80%, rgba(81,91,212) 100%);
+        }
+        .wrapper_social_media .button_social_media:nth-child(4):hover .icon_social_media{
+        background: #ff0000;
+        }
+
+        .wrapper_social_media .button_social_media .icon_social_media i{
+        font-size: 25px;
+        line-height: 60px;
+        transition: all 0.3s ease-out;
+        }
+        .wrapper_social_media .button_social_media:hover .icon_social_media i{
+        color: #fff;
+        }
+        .wrapper_social_media .button_social_media span{
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 60px;
+        margin-left: 10px;
+        transition: all 0.3s ease-out;
+        }
+        .wrapper_social_media .button_social_media:nth-child(1) span{
+        color: #4267B2;
+        }
+        .wrapper_social_media .button_social_media:nth-child(2) span{
+        color: #1DA1F2;
+        }
+        .wrapper_social_media .button_social_media:nth-child(3) span{
+        color: #E1306C;
+        }
+        .wrapper_social_media .button_social_media:nth-child(4) span{
+        color: #ff0000;
+        }
+
+
+      @media (max-width: 900px){
+        section h1{
+          font-size: 40px;
+        }
+
+        section .cards{
+          flex-direction: column;
+        }
+
+      }
+      
+
+canvas#cobe {
+	        position: relative;
+
+        }
+        @media (max-width: 1800px){
+            canvas#cobe {
+			    position: relative;
+			    right:0;
+		    }
+        }
+
+.reveal{
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: all 2s ease;
+}
+
+.reveal.active{
+  transform: translateY(0px);
+  opacity: 1;
+}
+</style>
+
+<script>
+  window.addEventListener('scroll', function(){
+      var header = document.querySelector("nav");
+      header.classList.toggle("sticky", window.scrollY > 0);
+  })
+</script>
+  <body>
+    <input type="checkbox" id="toggle">
+    <nav>
+        <a href="#" class="nav_bar_logo"><span class="heading_blue" style="color: #306998;">import</span><span class="heading_yellow" style="color: #ffd43b;">python</span></a>
+        <label class="navbar-toggler" for="toggle">
+            <span class="nav_bar_bar"></span>
+            <span class="nav_bar_bar"></span>
+            <span class="nav_bar_bar"></span>
+        </label>
+        <ul>
+            <li><a href="#library_section">Library</a></li>
+            <li><a href="#blog_section">Blog</a></li>
+            <li><a href="#project_section">Project</a></li>
+            <li><a href="#about_section">About</a></li>
+            <li><a href="#contact_section">Contact</a></li><br>
+        </ul>
+    </nav>
+    <section>
+      <h1>Welcome To<br><span class="heading_blue" style="color: #306998;">import</span><span class="heading_yellow" style="color: #ffd43b;">python</span></h1>
+    </section>
+    <section id="library_section">
+      <div class="reveal">
+        <h2>LIBRARY</h2>
+        <div class="site-container">            
+          <div class="article-container">
+            <a href="#" class="card-category" style="text-decoration: none;">
+              <article class="article-card">
+                  <figure class="article-image">
+                      <img src="bg.jpg" alt="">
+                  </figure>
+                  <div class="article-content">
+                      <p class="article-content_para">Travel</p>
+                      <h3 class="card-title">Trip Planning</h3>
+                      <p class="card-excerpt">Our mission is to provide educational, creative, and inspiring design, coding, and tech content for enthusiastic learners online.</p>
+                  </div>
+              </article>
+            </a>
+              <article class="article-card">
+                  <figure class="article-image">
+                      <img src="bg.jpg" alt="">
+                  </figure>
+                  <div class="article-content">
+                      <a href="#" class="card-category">Travel</a>
+                      <h3 class="card-title">Trip Planning</h3>
+                      <p class="card-excerpt">Our mission is to provide educational, creative, and inspiring design, coding, and tech content for enthusiastic learners online. Join over 1 million learners and watch XO PIXEL articles and video tutorials to develop your digital skills and become inspired and creative!</p>
+                  </div>
+              </article>
+              <article class="article-card">
+                  <figure class="article-image">
+                      <img src="bg.jpg" alt="">
+                  </figure>
+                  <div class="article-content">
+                      <a href="#" class="card-category">Travel</a>
+                      <h3 class="card-title">Trip Planning</h3>
+                      <p class="card-excerpt">Hello</p>
+                  </div>
+              </article>
+              <article class="article-card">
+                <figure class="article-image">
+                    <img src="bg.jpg" alt="">
+                </figure>
+                <div class="article-content">
+                    <a href="#" class="card-category">Travel</a>
+                    <h3 class="card-title">Trip Planning</h3>
+                    <p class="card-excerpt">Hello</p>
+                </div>
+            </article>
+            <a href="#" style="align-items: flex-end; color: #1D212B; text-decoration: none;">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="blog_section">
+      <div class="reveal">
+        <h2>BLOG</h2>
+        <div class="site-container">
+          <div class="article-container">
+              <article class="article-card">
+                  <figure class="article-image">
+                      <img src="bg.jpg" alt="">
+                  </figure>
+                  <div class="article-content">
+                      <a href="#" class="card-category">Travel</a>
+                      <h3 class="card-title">Trip Planning</h3>
+                      <p class="card-excerpt">Our mission is to provide educational, creative, and inspiring design, coding, and tech content for enthusiastic learners online.</p>
+                  </div>
+              </article>
+              <article class="article-card">
+                  <figure class="article-image">
+                      <img src="bg.jpg" alt="">
+                  </figure>
+                  <div class="article-content">
+                      <a href="#" class="card-category">Travel</a>
+                      <h3 class="card-title">Trip Planning</h3>
+                      <p class="card-excerpt">Our mission is to provide educational, creative, and inspiring design, coding, and tech content for enthusiastic learners online. Join over 1 million learners and watch XO PIXEL articles and video tutorials to develop your digital skills and become inspired and creative!</p>
+                  </div>
+              </article>
+              <article class="article-card">
+                  <figure class="article-image">
+                      <img src="bg.jpg" alt="">
+                  </figure>
+                  <div class="article-content">
+                      <a href="#" class="card-category">Travel</a>
+                      <h3 class="card-title">Trip Planning</h3>
+                      <p class="card-excerpt">Hello</p>
+                  </div>
+              </article>
+              <article class="article-card">
+                <figure class="article-image">
+                    <img src="bg.jpg" alt="">
+                </figure>
+                <div class="article-content">
+                    <a href="#" class="card-category">Travel</a>
+                    <h3 class="card-title">Trip Planning</h3>
+                    <p class="card-excerpt">Hello</p>
+                </div>
+            </article>
+              <a href="#" style="align-items: flex-end; color: white; text-decoration: none;">Read More &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="project_section">
+      <div class="reveal">
+        <h2>PROJECT</h2>
+        <div class="site-container">
+          <div class="article-container">
+              <article class="article-card">
+                  <figure class="article-image">
+                      <img src="bg.jpg" alt="">
+                  </figure>
+                  <div class="article-content">
+                      <a href="#" class="card-category">Travel</a>
+                      <h6>Date|Difficulty</h6>
+                      <h3 class="card-title">Trip Planning</h3>
+                      <p class="card-excerpt">Our mission is to provide educational, creative, and inspiring design, coding, and tech content for enthusiastic learners online.</p>
+                  </div>
+              </article>
+              <article class="article-card">
+                  <figure class="article-image">
+                      <img src="bg.jpg" alt="">
+                  </figure>
+                  <div class="article-content">
+                      <a href="#" class="card-category">Travel</a>
+                      <h3 class="card-title">Trip Planning</h3>
+                      <p class="card-excerpt">Our mission is to provide educational, creative, and inspiring design, coding, and tech content for enthusiastic learners online. Join over 1 million learners and watch XO PIXEL articles and video tutorials to develop your digital skills and become inspired and creative!</p>
+                  </div>
+              </article>
+              <article class="article-card">
+                  <figure class="article-image">
+                      <img src="bg.jpg" alt="">
+                  </figure>
+                  <div class="article-content">
+                      <a href="#" class="card-category">Travel</a>
+                      <h3 class="card-title">Trip Planning</h3>
+                      <p class="card-excerpt">Hello</p>
+                  </div>
+              </article>
+              <article class="article-card">
+                <figure class="article-image">
+                    <img src="bg.jpg" alt="">
+                </figure>
+                <div class="article-content">
+                    <a href="#" class="card-category">Travel</a>
+                    <h3 class="card-title">Trip Planning</h3>
+                    <p class="card-excerpt">Hello</p>
+                </div>
+            </article>
+            <a href="#" style="align-items: flex-end; color: #1D212B; text-decoration: none;">Read More &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="about_section">
+      <div class="reveal">
+        <div class="main_about">
+          <canvas
+          id="cobe"
+          style="width: 500px; height: 500px;"
+          width="1000"
+          height="1000"
+          ></canvas>
+          <div class="about-text">
+              <h1>About Us</h1>
+              <h5>Developer<span> & Designer</span></h5>
+              <p>Read This
+                  A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long.
+              </p>
+          </div>
+      </div>
+    </section>
+    <section id="contact_section">
+        
+      <div class="wrapper_faq">
+
+        <h1>FAQ</h1>
+      
+        <div class="wrap-1">
+          <input type="radio" id="tab-1" name="tabs">
+          <label for="tab-1"><div>tab one</div><div class="cross"></div></label>
+          <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia autem quasi inventore unde nobis voluptatibus illum quae rerum laudantium minima, excepturi quis maiores. Eaque quae, nam delectus explicabo, deserunt ipsum!</div>
+        </div>
+      
+        <div class="wrap-2">
+          <input type="radio" id="tab-2" name="tabs">
+          <label for="tab-2"><div>tab two</div><div class="cross"></div></label>
+          <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia autem quasi inventore unde nobis voluptatibus illum quae rerum laudantium minima, excepturi quis maiores. Eaque quae, nam delectus <span class="tip" data-tip="Eaque quae, nam delectus explicabo, deserunt ipsum!">explicabo</span>,
+            deserunt ipsum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span class="tip" data-tip="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">Mollitia</span> autem quasi inventore unde nobis voluptatibus illum quae rerum laudantium
+            minima, excepturi quis maiores. Eaque quae, nam delectus explicabo, <span class="tip" data-tip="Lorem ipsum dolor sit amet.">deserunt</span> ipsum!</div>
+        </div>
+      
+        <div class="wrap-3">
+          <input type="radio" id="tab-3" name="tabs">
+          <label for="tab-3"><div>tab three</div><div class="cross"></div></label>
+          <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia autem quasi inventore unde nobis voluptatibus illum quae rerum laudantium minima, excepturi quis maiores. Eaque quae, nam delectus <span class="tip" data-tip="Eaque quae, nam delectus explicabo, deserunt ipsum!">explicabo</span>,
+            deserunt ipsum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span class="tip" data-tip="Lorem ipsum dolor sit amet, consectetur adipisicing elit.">Mollitia</span> autem quasi inventore unde nobis voluptatibus illum quae rerum laudantium
+            minima, excepturi quis maiores. Eaque quae, nam delectus explicabo, <span class="tip" data-tip="Lorem ipsum dolor sit amet.">deserunt</span> ipsum!</div>
+        </div>
+      </div>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+      <h1>CONTACT US</h1>
+      <div class="wrapper_social_media">
+        <div class="button_social_media">
+           <div class="icon_social_media">
+              <i class="fab fa-facebook-f"></i>
+           </div>
+           <span>Facebook</span>
+        </div>
+        <div class="button_social_media">
+           <div class="icon_social_media">
+              <i class="fab fa-twitter"></i>
+           </div>
+           <span>Twitter</span>
+        </div>
+        <div class="button_social_media">
+           <div class="icon_social_media">
+              <i class="fab fa-instagram"></i>
+           </div>
+           <span>Instagram</span>
+        </div>
+        <div class="button_social_media">
+           <div class="icon_social_media">
+              <i class="fab fa-youtube"></i>
+           </div>
+           <span>YouTube</span>
+        </div>
+     </div>
+    </section>
+
+    <script type="module">
+        import createGlobe from 'https://cdn.skypack.dev/cobe'
+
+        let phi = 0
+        let canvas = document.getElementById("cobe")
+
+        const globe = createGlobe(canvas, {
+        devicePixelRatio: 2,
+        width: 1000,
+        height: 1000,
+        phi: 0,
+        theta: 0,
+        dark: 1,
+        diffuse: 1.2,
+        scale: 1,
+        mapSamples: 16000,
+        mapBrightness: 6,
+        baseColor: [1, 1, 1],
+        markerColor: [1, 0, 0],
+        glowColor: [1, 1, 1],
+        offset: [0, 0],
+        markers: [
+
+        ],
+        onRender: (state) => {
+            // Called on every animation frame.
+            // `state` will be an empty object, return updated params.
+            state.phi = phi
+            phi += 0.01
+        },
+        })
+        </script>
+        <script>
+        window.addEventListener('resize', function() {
+            var canvas = document.getElementById('id');
+            canvas.style.left = '0';
+        });
+        </script>
+
+
+    <script type="text/javascript">
+    window.addEventListener('scroll', reveal);
+
+    function reveal(){
+      var reveals = document.querySelectorAll('.reveal');
+
+      for(var i = 0; i < reveals.length; i++){
+
+        var windowheight = window.innerHeight;
+        var revealtop = reveals[i].getBoundingClientRect().top;
+        var revealpoint = 150;
+
+        if(revealtop < windowheight - revealpoint){
+          reveals[i].classList.add('active');
+        }
+        else{
+          reveals[i].classList.remove('active');
+        }
+      }
+    }
+    </script>
+  </body>
+</html>

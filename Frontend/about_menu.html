@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: 'Josefin Sans', sans-serif;
+            box-sizing: border-box;
+        }
+        .about{
+            width: 100%;
+            padding: 78px 0px;
+            background-color: #191919;
+        }
+        .about img{
+            height: auto;
+            width: 420px;    
+        }
+        .about-text{
+            width: 550px;
+        }
+        .main_about{
+            width: 1130px;
+            max-width: 95%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .about-text h1{
+            color: white;
+            font-size: 80px;
+            text-transform: capitalize;
+            margin-bottom: 20px;
+        }
+        .about-text h5{
+            color: white;
+            font-size: 25px;
+            text-transform: capitalize;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+        span{
+            color: #f9004d;            
+        }
+        .about-text p{
+            color: #fcfc;
+            letter-spacing: 1px;
+            line-height: 28px;
+            font-size: 18px;
+            margin-bottom: 45px;
+        }
+        button{
+            background: #f9004d;
+            color: white;
+            text-decoration: none;
+            border: 2px solid transparent;
+            font-weight: bold;
+            padding: 13px 30px;
+            border-radius: 30px;
+            transition: .4s;
+        }
+        button:hover{
+            background: transparent;
+            border: 2px solid #f9004d;
+            cursor: pointer;
+        }
+        @media (max-width: 1200px) {
+            .main_about {
+                flex-direction: column;
+                align-items: center;
+            }
+            .about-text {
+                width: 100%;
+                text-align: center;
+                margin-top: 30px;
+            }
+            .about-text h1 {
+                font-size: 60px;
+            }
+            .about-text h5 {
+                font-size: 20px;
+            }
+            .about img {
+                width: 100%;
+                max-width: 400px;
+            }
+            .about-text p {
+                font-size: 16px;
+            }
+        }
+        .accordion_menu{
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .accordion_menu .accordion_menu_contentBx{
+            position: relative;
+            margin: 10px 20px;
+        }
+        .accordion_menu .accordion_menu_contentBx .accordion_menu_label{
+            position: relative;
+            padding: 10px;
+            background: #2694af;
+            color: #fff;
+            cursor: pointer;
+        }
+        .accordion_menu .accordion_menu_contentBx .accordion_menu_label::before{
+            content: '+';
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+        }
+        .accordion_menu .accordion_menu_contentBx.active .accordion_menu_label::before{
+            content: '-';
+        }
+        .accordion_menu .accordion_menu_contentBx .accordion_menu_content{
+            position: relative;
+            background: #fff;
+            height: 0;
+            overflow: hidden;
+            transition: 0.5s;
+            overflow-y: auto;
+        }
+        .accordion_menu .accordion_menu_contentBx.active .accordion_menu_content{
+            height: 150px;
+            padding: 10px;
+        }
+
+    </style>
+    <body>
+        <section class = "about">
+            <div class="main_about">
+                <img src="bg.jpg">
+                <div class="about-text">
+                    <h1>About Us</h1>
+                    <h5>Developer<span> & Designer</span></h5>
+                    <p>Read This
+                        A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long.
+                    </p>
+                    <button type="button">Lets Talk</button>
+                </div>
+            </div>
+        </section>
+        <section class = "about">
+            <div class="accordion_menu">
+                <div class="accordion_menu_contentBx">
+                    <div class="accordion_menu_label">List One</div>
+                    <div class="accordion_menu_content">
+                        <p>Coming Next</p>
+                    </div>
+                </div>
+                <div class="accordion_menu_contentBx">
+                    <div class="accordion_menu_label">List One</div>
+                    <div class="accordion_menu_content">
+                        <p>Coming Next</p>
+                    </div>
+                </div>
+                <div class="accordion_menu_contentBx">
+                    <div class="accordion_menu_label">List One</div>
+                    <div class="accordion_menu_content">
+                        <p>Coming Next</p>
+                    </div>
+                </div>
+                <div class="accordion_menu_contentBx">
+                    <div class="accordion_menu_label">List One</div>
+                    <div class="accordion_menu_content">
+                        <p>Coming Next</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+            const accordion = document.getElementsByClassName('accordion_menu_contentBx');
+            for(i = 0; i<accordion.length;i++){
+                accordion[i].addEventListener('click', function(){
+                    this.classList.toggle('active')
+                })
+            }
+        </script>
+    </body>
+</html>
